@@ -1,25 +1,20 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
 # Install the packages we need. Avahi will be included
-RUN echo "http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories &&\
-	apk add --update cups \
-	cups-libs \
+RUN apt-get update && apt-get install -y \
+	brother-lpr-drivers-extra brother-cups-wrapper-extra \
+	cups \
 	cups-pdf \
-	cups-client \
-	cups-filters \
-	cups-dev \
-	ghostscript \
-	avahi \
 	inotify-tools \
-	python \
-	python-dev \
-	py-pip \
-	build-base \
-	wget \
-	rsync \
-	&& pip --no-cache-dir install --upgrade pip \
-	&& pip install pycups \
-	&& rm -rf /var/cache/apk/*
+	python-cups \
+	python-lxml \
+	avahi-daemon
+
+ADD drivers /tmp/drivers
+RUN cd /tmp/drivers && ./install_drivers.sh && rm -rf /tmp/drivers
+
+# Clean up after installation
+RUN rm -rf /var/lib/apt/lists/*
 
 # This will use port 631
 EXPOSE 631
