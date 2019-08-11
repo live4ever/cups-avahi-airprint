@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
 	inotify-tools \
 	python-cups \
 	python-lxml \
-	avahi-daemon
+	avahi-daemon \
+	rsync
 
 ADD drivers /tmp/drivers
 RUN cd /tmp/drivers && ./install_drivers.sh && rm -rf /tmp/drivers
