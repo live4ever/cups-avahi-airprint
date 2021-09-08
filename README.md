@@ -17,7 +17,8 @@ Brother Cupswrapper Driver: http://support.brother.com/g/s/id/linux/en/instructi
 Canon UFRII
 
 * scripts from [oxgithub/docker-cups-airprint](https://github.com/oxgithub/docker-cups-airprint)
-* added HL-4150CDN driver
+* removed HL-4150CDN driver
+* added HL-3045CN driver
 
 ## Configuration
 
